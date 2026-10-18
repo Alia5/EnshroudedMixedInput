@@ -1,0 +1,40 @@
+#include <winver.h>
+
+@EMI_ICON_LINE@
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION @EMI_FIXED_FileVersion@
+PRODUCTVERSION @EMI_FIXED_ProductVersion@
+FILEFLAGSMASK VS_FFI_FILEFLAGSMASK
+#ifdef _DEBUG
+FILEFLAGS VS_FF_DEBUG
+#else
+FILEFLAGS 0x0L
+#endif
+FILEOS VOS_NT_WINDOWS32
+FILETYPE VFT_DLL
+FILESUBTYPE VFT2_UNKNOWN
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "@EMI_LANG_ID@@EMI_CHARSET_ID@"
+        BEGIN
+            VALUE "Comments", "@EMI_Comments@"
+            VALUE "CompanyName", "@EMI_CompanyName@"
+            VALUE "FileDescription", "EnshroudedMixedInput Loader"
+            VALUE "FileVersion", "@EMI_FileVersion@"
+            VALUE "InternalName", "@EMI_InternalName@"
+            VALUE "LegalCopyright", "@EMI_LegalCopyright@"
+            VALUE "LegalTrademarks", "@EMI_LegalTrademarks@"
+            VALUE "OriginalFilename", "dinput8.dll"
+            VALUE "PrivateBuild", "@EMI_PrivateBuild@"
+            VALUE "ProductName", "@EMI_ProductName@"
+            VALUE "ProductVersion", "@EMI_ProductVersion@"
+            VALUE "SpecialBuild", "@EMI_SpecialBuild@"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x@EMI_LANG_ID@, 0x@EMI_CHARSET_ID@
+    END
+END

@@ -1,0 +1,16 @@
+name: PR-Check
+
+on:
+  pull_request:
+    branches:
+      - '**'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    uses: ./.github/workflows/build_base.yml
+    with:
+      upload_artifacts: true
+      artifact_suffix: "-pr${{ github.event.pull_request.number }}"

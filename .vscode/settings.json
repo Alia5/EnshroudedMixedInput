@@ -1,0 +1,12 @@
+{
+    "go.toolsEnvVars": {
+        "CGO_ENABLED": "1",
+        "GOOS": "windows",
+        "GOARCH": "amd64"
+    },
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "always"
+    },
+    "cmake.sourceDirectory": "${workspaceFolder}/loader"
+}
