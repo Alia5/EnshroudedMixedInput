@@ -1,0 +1,3 @@
+package mixedinput
+
+var MouseEventJumpTableEntries = mouseEventJumpTableEntries

@@ -3,8 +3,9 @@
 Mixed input for [Enshrouded](https://store.steampowered.com/app/1203220/Enshrouded/):
 use a gamepad and mouse **at the same time**, without the game switching between them.
 
-> [!WARNING]
-> Work in progress. The mixed input mod is not functional yet.
+- Mouse input no longer switches the game to keyboard/mouse mode. Keyboard input still does.
+- While in gamepad mode, mouse buttons, mouse look and the other keyboard/mouse bindings work alongside the gamepad.
+- In gamepad mode, mouse look follows the gamepad "invert camera" setting.
 
 ## Installation
 
