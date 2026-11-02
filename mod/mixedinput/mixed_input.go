@@ -189,14 +189,25 @@ func (m *MixedInput) updateGameplayAction(action, mode, keyboardMouseModifiers, 
 func (m *MixedInput) addDirectionalActionInput(input, actions, action, primary, dt uintptr) uintptr {
 	result := m.addDirectionalActionInputDetour.CallOriginal(input, actions, action, primary, dt)
 
-	mode := (*keen.InputMode)(unsafe.Pointer(actions))
-	if *mode != keen.InputModeGamepad {
+	if *(*keen.InputMode)(unsafe.Pointer(actions)) != keen.InputModeGamepad {
 		return result
 	}
 
-	*mode = keen.InputModeKeyboardMouse
-	m.addDirectionalActionInputDetour.CallOriginal(input, actions, action, primary, dt)
-	*mode = keen.InputModeGamepad
+	actionStruct := actions + keen.ActionsHeaderSize + keen.ActionSize*uintptr(byte(action))
+	if *(*byte)(unsafe.Pointer(actionStruct + m.actionActiveOffset)) == 0 {
+		return result
+	}
+
+	binding := actionStruct + keen.ActionKeyboardMouseSecondaryBinding
+	if byte(primary) != 0 {
+		binding = actionStruct + keen.ActionKeyboardMousePrimaryBinding
+	}
+
+	kind := *(*keen.BindingSourceKind)(unsafe.Pointer(binding + keen.BindingSourceKindOffset))
+	snapshot := *(*float32)(unsafe.Pointer(binding + keen.BindingSnapshotValueOffset))
+	value := bindingAxisValue(keen.GameplayAction(action), kind, snapshot, int64(dt))
+
+	addDirectional((*DirectionalInput)(unsafe.Pointer(input)), directionalSlot(kind), keen.GameplayAction(action), value)
 
 	return result
 }
